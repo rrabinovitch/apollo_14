@@ -19,5 +19,19 @@ describe Astronaut, type: :model do
 
       expect(Astronaut.average_age).to eq(43)
     end
+
+    it "#time_in_space" do
+      armstrong = Astronaut.create!(name: "Neil Armstrong", age: 37, job: "Commander")
+
+      gemini = Mission.create!(title: "Gemini 7", time_in_space: 40)
+      apollo = Mission.create!(title: "Apollo 13", time_in_space: 14)
+      capricorn = Mission.create!(title: "Capricorn 4", time_in_space: 24)
+
+      armstrong_gemini = AstronautMission.create!(astronaut_id: armstrong.id, mission_id: gemini.id)
+      armstrong_apollo = AstronautMission.create!(astronaut_id: armstrong.id, mission_id: apollo.id)
+      armstrong_capricorn = AstronautMission.create!(astronaut_id: armstrong.id, mission_id: capricorn.id)
+
+      expect(armstrong.time_in_space).to eq(78)
+    end
   end
 end
